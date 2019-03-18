@@ -1,0 +1,22 @@
+# Basic commands
+alias ls='ls -hN --color=auto --group-directories-first'
+alias grep='grep --color=auto' 
+
+# Colors
+alias red='\e[31m'
+alias lred='\e[91m'
+alias yellow='\e[33m'
+alias lyellow='\e[93m'
+alias magenta='\e[35m'
+alias lmagenta='\e[95m'
+alias green='\e[32m'
+alias lgreen='\e[92m'
+alias cyan='\e[36m'
+alias lcyan='\e[96m'
+alias blue='\e[34m'
+alias lblue='\e[94m'
+alias black='\e[30m'
+alias dgray='\e[90m'
+alias lgray='\e[37m'
+alias white='\e[97m'
+alias default_color='\e[39m'
