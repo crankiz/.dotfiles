@@ -1,0 +1,15 @@
+# Sudo
+alias sudo='sudo '
+
+# Basic commands
+alias ls='ls -lah --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+alias ccat='highlight --force --out-format=ansi'
+alias dd='dd status=progress'
+alias vecka='date +%V'
+
+# Win Apps
+alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+alias spotify='/mnt/c/Users/tobias.svedberg/AppData/Roaming/Spotify/Spotify.exe'
+alias code='/mnt/c/Users/tobias.svedberg/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe'
+
