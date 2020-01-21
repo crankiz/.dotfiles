@@ -20,8 +20,6 @@ pkg_pip=(
   derp
 )
 
-
-
 pkg_mgr_ok=()
 pkg_mgr_nok=()
 pkg_git_ok=()
