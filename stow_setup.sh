@@ -1,5 +1,5 @@
 #!/bin/bash
-# Not finnished
+# Not finished
 
 readarray -d '' array < <(find ~/.dotfiles -mindepth 1 -maxdepth 1 -type d -printf "%f\n")
 
