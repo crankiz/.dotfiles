@@ -1,1 +1,18 @@
 Add aliases for exa, ccat
+zsh
+Oh-my-zsh
+zsh plugins
+Powrline10k
+Deployment script
+Windows terminal profile.json bacup
+
+
+
+
+### Install order
+1. pacman -S python-pip powerline-fonts
+2. pip istall powerline-shell
+3. stow bash
+4. stow vim
+5. https://github.com/adam7/delugia-code/releases add font to windows
+6. 
