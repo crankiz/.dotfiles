@@ -16,11 +16,13 @@
 ### Deployment script
 ##### Install order
 
-[ ] pacman -S vim curl git exa highlight python-pip powerline-fonts
-[ ] pip istall powerline-shell
-[ ] install font https://github.com/adam7/delugia-code/releases add font to windows
-[ ] stow bash
-[ ] stow vim
+- [ ] pacman -S vim curl git zsh exa highlight python-pip powerline-fonts
+- [ ] sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+- [ ] curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+- [ ] pip istall powerline-shell
+- [ ] install font https://github.com/adam7/delugia-code/releases add font to windows
+- [ ] stow bash
+- [ ] stow vim
 
 
-[x]
+
