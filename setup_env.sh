@@ -1,86 +1,25 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# package list
-pkg_mgr=(
-  vim
-  curl
-  git
-  exa
-  highlight
-  windows95
-)
+# Clone dotfiles repo
+git clone https://github.com/crankiz/.dotfiles.git ${HOME}
 
-pkg_git=(
-  pfetch
-  whaaaha
-)
+# Read applications from file 
+readarray -t a < $(curl -s https://raw.githubusercontent.com/crankiz/.dotfiles/dev/packages.txt) 
 
-pkg_pip=(
-  powerline-shell
-  derp
-)
+# Install all applications from array
+sudo pacman --noconfirm -S ${pkg_mgr[@]}
 
-pkg_mgr_ok=()
-pkg_mgr_nok=()
-pkg_git_ok=()
-pkg_git_nok=()
-pkg_pip_ok=()
-pkg_pip_nok=()
+# Deploy all dotfiles
+stow --adopt bash
+stow --adopt vim
+stow --adopt zsh
 
-# Default repo
-for i in "${pkg_mgr[@]}"
-do
-  which $i &> /dev/null && pkg_mgr_ok+=($i) || pkg_mgr_nok+=($i)
-done
+# Install zsh and plugins and theme
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
-# Python package
-for i in "${pkg_pip[@]}"
-do
-  which $i &> /dev/null && pkg_pip_ok+=($i) || pkg_pip_nok+=($i)
-done
-
-# Github
-for i in "${pkg_git[@]}"
-do
-  which $i &> /dev/null && pkg_git_ok+=($i) || pkg_git_nok+=($i)
-done
-
-echo -e "Default repository"
-printf "✔ - %s\n" ${pkg_mgr_ok[@]}
-printf "✖ - %s\n" ${pkg_mgr_nok[@]}
-echo -e "\nGithub"
-printf "✔ - %s\n" ${pkg_git_ok[@]}
-printf "✖ - %s\n" ${pkg_git_nok[@]}
-echo -e "\nPython"
-printf "✔ - %s\n" ${pkg_pip_ok[@]}
-printf "✖ - %s\n" ${pkg_pip_nok[@]}
-
-
-
-check_os(){
-  OS=$(( lsb_release -is || sed -n 's/^ID=\([0-9a-zA-Z]*$\)/\1/p' /etc/*release) 2>/dev/null |tr '[:upper:]' '[:lower:]')
-  
-  if [ $EUID != 0 ]; then
-    sudo "$0" "$@"
-    exit $?
-  fi
-
-  if [ $OS = "arch" ]; then
-    pacman -S ${pkg_mgr_nok[@]}
-  elif [ $OS = "ubuntu" ]; then
-    apt install ${pkg_mgr_nok[@]}
-  else
-    echo "Could not install because the distribution is unknown"
-    exit 1
-  fi
-}
-
-
-while true; do
-    read -p "Do you wish to install missing packages?" yn
-    case $yn in
-        [Yy]* ) check_os; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+# Install pfetch
+curl -fsSL https://raw.githubusercontent.com/dylanaraps/pfetch/master/pfetch --output /usr/local/bin/pfetch
+chmod +x /usr/local/bin/pfetch
