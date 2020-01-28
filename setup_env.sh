@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Clone dotfiles repo
-git clone https://github.com/crankiz/.dotfiles.git ${HOME}
+git clone https://github.com/crankiz/.dotfiles.git ${HOME}/
 
 # Read applications from file 
 readarray -t a < $(curl -s https://raw.githubusercontent.com/crankiz/.dotfiles/dev/packages.txt) 
