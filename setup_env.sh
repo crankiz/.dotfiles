@@ -1,25 +1,84 @@
 #!/usr/bin/env bash
 
-# Clone dotfiles repo
-git clone https://github.com/crankiz/.dotfiles.git ${HOME}/.dotfiles
+# Read package list from git repo
+readarray -t pkg_list < <(curl -fsSL https://raw.githubusercontent.com/crankiz/.dotfiles/master/packages.txt)
 
-# Read applications from file 
-readarray pkg_mgr < ${HOME}/.dotfiles/packages.txt 
+# Installing packages
+for pkg in ${pkg_list[@]}
+do
+    echo -e "Installing ${pkg_list[@]}\n"
+    command -v $pkg &> /dev/null || sudo pacman --noconfirm -S $pkg || sudo apt install -y $pkg
+done
 
-# Install all applications from array
-sudo pacman --noconfirm -S ${pkg_mgr[@]}
+# Install oh-my-zsh
+echo -e "Installing oh-my-zsh\n"
+if sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; then
+	echo -e "Installed OH-MY-ZSH\n"
+fi
 
-# Deploy all dotfiles
+# Git clone my dotfiles
+echo -e "Git clone my dotfiles\n"
+if git clone https://github.com/crankiz/.dotfiles.git ${HOME}/.dotfiles; then :
+else
+    cd ${HOME}/.dotfiles && git pull && cd ${HOME}
+fi
+
+# Install plugins and themes
+if git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions; then :
+else
+	cd ${HOME}/.oh-my-zsh/plugins/zsh-autosuggestions && git pull && cd ${HOME}
+fi
+
+if git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting; then :
+else
+	cd ${HOME}/.oh-my-zsh/plugins/zsh-syntax-highlighting && git pull && cd ${HOME}
+fi
+
+if git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions; then :
+else
+	cd ${HOME}/.oh-my-zsh/custom/plugins/zsh-completions && git pull && cd ${HOME}
+fi
+
+if git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search; then :
+else
+	cd ${HOME}/.oh-my-zsh/custom/plugins/zsh-history-substring-search && git pull && cd ${HOME}
+fi
+
+# INSTALL FONTS
+if git clone https://github.com/powerline/fonts.git ${HOME}/powerline_fonts; then :
+else
+	cd ${HOME}/powerline_fonts && git pull 
+fi
+
+if ${HOME}/powerline_fonts/install.sh && rm -rf ${HOME}/powerline_fonts; then
+	echo -e "\npowerline_fonts Installed\n"
+else
+	echo -e "\npowerline_fonts Installation Failed\n"
+fi
+
+curl -s https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Regular.ttf -o ${HOME}/.dotfiles/fonts
+curl -s https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Bold.ttf -o ${HOME}/.dotfiles/fonts
+curl -s https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Italic.ttf -o ${HOME}/.dotfiles/fonts
+curl -s https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Bold%20Italic.ttf -o ${HOME}/.dotfiles/fonts
+
+
+if git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k; then :
+else
+	cd ~/.oh-my-zsh/custom/themes/powerlevel10k && git pull
+fi
+
 stow --adopt bash
 stow --adopt vim
 stow --adopt zsh
+stow --adopt p10k
 
-# Install zsh and plugins and theme
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+source ~/.zshrc
 
-# Install pfetch
-#curl -fsSL https://raw.githubusercontent.com/dylanaraps/pfetch/master/pfetch --output /usr/local/bin/pfetch
-#chmod +x /usr/local/bin/pfetch
+echo -e "\nSudo access is needed to change default shell\n"
+
+if chsh -s $(which zsh) && /bin/zsh -i -c upgrade_oh_my_zsh; then
+	echo -e "Installation Successful, exit terminal and enter a new session"
+else
+	echo -e "Something is wrong"
+fi
+exit
