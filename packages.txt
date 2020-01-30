@@ -1,0 +1,7 @@
+stow
+vim
+curl
+git
+exa
+highlight
+zsh
