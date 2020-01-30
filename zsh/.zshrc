@@ -80,7 +80,9 @@ plugins=(git zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
+source $HOME/.export
+source $HOME/.aliases
+source $HOME/.functions
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
