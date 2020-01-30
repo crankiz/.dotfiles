@@ -87,7 +87,6 @@
     vim_shell               # vim shell indicator (:sh)
     midnight_commander      # midnight commander shell (https://midnight-commander.org/)
     vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
-    # vpn_ip                # virtual private network indicator
     # load                  # CPU load
     # disk_usage            # disk usage
     # ram                   # free RAM
@@ -98,6 +97,7 @@
     # =========================[ Line #2 ]=========================
     newline
     public_ip             # public IP address
+    vpn_ip                # virtual private network indicator
     # proxy                 # system-wide http/https/ftp proxy
     battery               # internal battery
     # example               # example user-defined segment (see prompt_example function below)
@@ -1050,7 +1050,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_PUBLIC_IP_VISUAL_IDENTIFIER_EXPANSION='⭐'
   typeset -g POWERLEVEL9K_PUBLIC_IP_FILE='/tmp/p9k_public_ip'
-  typeset -g POWERLEVEL9K_PUBLIC_IP_HOST='http://ident.me'
+  typeset -g POWERLEVEL9K_PUBLIC_IP_HOST='https://ifconfig.me/ip'
   typeset -g POWERLEVEL9K_PUBLIC_IP_TIMEOUT=300
   typeset -g POWERLEVEL9K_PUBLIC_IP_METHODS=(dig curl wget)
   ########################[ vpn_ip: virtual private network indicator ]#########################
@@ -1061,7 +1061,8 @@
   typeset -g POWERLEVEL9K_VPN_IP_CONTENT_EXPANSION=
   # Regular expression for the VPN network interface. Run ifconfig while on VPN to see the
   # name of the interface.
-  typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(wg|(.*tun))[0-9]*'
+  # typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(wg|(.*tun))[0-9]*'
+  typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(wg|(.*eth))[8]*'
   # Custom icon.
   # typeset -g POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
