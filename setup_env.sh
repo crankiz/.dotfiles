@@ -4,9 +4,9 @@
 readarray -t pkg_list < <(curl -fsSL https://raw.githubusercontent.com/crankiz/.dotfiles/master/packages.txt)
 
 # Installing packages
+echo -e "Installing ${pkg_list[@]}\n"
 for pkg in ${pkg_list[@]}
 do
-    echo -e "Installing ${pkg_list[@]}\n"
     command -v $pkg &> /dev/null || sudo pacman --noconfirm -S $pkg || sudo apt install -y $pkg
 done
 
@@ -62,15 +62,17 @@ curl -s https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts
 curl -s https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Bold%20Italic.ttf -o ${HOME}/.dotfiles/fonts
 
 
-if git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k; then :
+if git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k; then :
 else
 	cd ~/.oh-my-zsh/custom/themes/powerlevel10k && git pull
 fi
 
+cd ${HOME}/.dotfiles
 stow --adopt bash
 stow --adopt vim
 stow --adopt zsh
 stow --adopt p10k
+cd ${HOME}
 
 source ~/.zshrc
 
