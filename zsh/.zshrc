@@ -8,15 +8,14 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/crankiz/.oh-my-zsh"
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME=powerlevel10k/powerlevel10k
+ZSH_THEME="robbyrussell"
+# ZSH_THEME=powerlevel10k/powerlevel10k
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -75,11 +74,25 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
+#plugins=(git zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
 
-source $ZSH/oh-my-zsh.sh
+
 
 # User configuration
+source "${HOME}/.zgen/zgen.zsh"
+
+# if the init script doesn't exist
+if ! zgen saved; then
+  # specify plugins here
+  zgen load romkatv/powerlevel10k powerlevel10k # p10k theme
+  zgen git
+  zgen zsh-autosuggestions
+  zgen zsh-completions
+  zgen zsh-syntax-highlighting
+  zgen zsh-history-substring-search
+  # generate the init script from plugins above
+  zgen save
+fi
 source $HOME/.export
 source $HOME/.aliases
 source $HOME/.functions
