@@ -67,18 +67,16 @@ else
 	cd ~/.oh-my-zsh/custom/themes/powerlevel10k && git pull
 fi
 
-cd ${HOME}/.dotfiles
-stow --adopt bash
-stow --adopt vim
-stow --adopt zsh
-stow --adopt p10k
-cd ${HOME}
-
-source ~/.zshrc
-
 echo -e "\nSudo access is needed to change default shell\n"
 
 if chsh -s $(which zsh) && /bin/zsh -i -c upgrade_oh_my_zsh; then
+    cd ${HOME}/.dotfiles
+    stow --adopt bash
+    stow --adopt vim
+    stow --adopt zsh
+    stow --adopt p10k
+    cd ${HOME}
+    source ~/.zshrc
 	echo -e "Installation Successful, exit terminal and enter a new session"
 else
 	echo -e "Something is wrong"
