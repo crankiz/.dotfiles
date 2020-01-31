@@ -46,14 +46,15 @@ curl -s https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts
 
 echo -e "\nSudo access is needed to change default shell\n"
 
-if chsh -s $(which zsh) && /bin/zsh -i -c upgrade_oh_my_zsh; then
+if chsh -s $(which zsh); then
     cd ${HOME}/.dotfiles
     stow --adopt bash
     stow --adopt vim
     stow --adopt zsh
     stow --adopt p10k
     cd ${HOME}
-    source ~/.zshrc
+    source ${HOME}/.zshrc
+	exec $(which zsh) -i 
 	echo -e "Installation Successful, exit terminal and enter a new session"
 else
 	echo -e "Something is wrong"
