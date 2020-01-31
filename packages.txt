@@ -2,6 +2,8 @@ stow
 vim
 curl
 git
-exa
-highlight
 zsh
+highlight
+exa
+fonts-powerline
+powerline-fonts
