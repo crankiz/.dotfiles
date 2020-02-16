@@ -1,7 +1,10 @@
+zsh
 stow
 vim
 curl
+jq
 git
-exa
 highlight
-zsh
+exa
+fonts-powerline
+powerline-fonts
