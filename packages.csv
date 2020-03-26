@@ -1,0 +1,11 @@
+R,zsh,,
+R,stow,,
+R,vim,,
+R,curl,,
+R,jq,,
+R,git,,
+G,https://github.com/powerline/fonts.git,.local/share,${HOME}/.local/share/fonts/install.sh && rm -rf ${HOME}/.local/share/fonts/install.sh
+G,https://github.com/zsh-users/zsh-autosuggestions.git,/.config/zsh/plugin,
+G,https://github.com/zsh-users/zsh-completions.git,/.config/zsh/plugin,
+G,https://github.com/zsh-users/zsh-syntax-highlighting.git,/.config/zsh/plugin,
+C,https://starship.rs/install.sh,,
