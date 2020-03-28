@@ -1,4 +1,7 @@
 #!/bin/bash
+#TODO - Clean up repo and make it work properly
+#TODO - Fix .dotfiles and configs
+#TODO - Symlink dotfiles
 #TODO - Fix info and error functions, perhaps make on function?
 #TODO - Fix help text
 
@@ -20,7 +23,7 @@ info(){
 }
 
 ### Create home dir structure
-tree=( ".config/zsh/plugins"  ".local/share" "script" "repos")
+tree=( ".config/zsh/plugins" ".local/bin" ".local/share" "script" "repos")
 for dir in "${tree[@]}"; do
     [[ -d "${HOME}/${dir}" ]] && info "Directory ${HOME}/${dir} already exists" || (mkdir -p "${HOME}/${dir}" && info "Directory ${HOME}/${dir} created")
 done
@@ -76,3 +79,12 @@ ${HOME}/.local/share/fonts/install.sh && info "Power fonts is installed" && rm -
 
 
 ### Install starship
+readarray -d '' curl_pkg < <(awk -F "," '/^C/{print $2}' <<< "$(curl -fsSL ${package_list})")
+
+install_curl(){
+    curl -fsSL $1 | bash -s -- -b ${HOME}/.local/bin
+}
+
+for pkg in "${curl_pkg[@]}"; do
+    install_curl ${pkg}
+done
