@@ -1,13 +1,12 @@
-<<<<<<< HEAD
-ZSHPATH="${HOME}/.zsh"
+ZSHPATH="${HOME}/.config/zsh"
 
 # Spaceship prompt
 autoload -U promptinit; promptinit
 prompt spaceship
 
 # Source plugins
-source ${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ${ZPATH}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ${ZPATH}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Adding path for zsh functions
 fpath=( "${ZSHPATH}/.zfunctions" "${ZSHPATH}/zsh-completions/src" $fpath )
@@ -45,11 +44,3 @@ SPACESHIP_DOTNET_SHOW=false
 
 
 
-=======
-source ~/.zsh_plugins/powerlevel10k/powerlevel10k.zsh-theme
-source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
-#https://github.com/zsh-users/zsh-completions.git
->>>>>>> ae04db6de15fdc5c6a915850ba7efac835f87b2c
