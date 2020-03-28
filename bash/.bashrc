@@ -43,10 +43,7 @@ fi
 
 unset color_prompt force_color_prompt
 
-
-function _update_ps1() {
-  PS1=$(powerline-shell $?)
-}
+eval "$(starship init bash)"
 
 if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
   PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"

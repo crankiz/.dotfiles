@@ -1,24 +1,11 @@
-Add aliases for exa, ccat
-zsh
-Oh-my-zsh
-zsh plugins
-Powrline10k
-Deployment script
-Windows terminal profile.json bacup
-gitignore
+- [x] Clean up repo and make it work properly
+- [ ] Deployment script
+- [ ] Fix .dotfiles and configs
+- [ ] zshrc
+- [x] zsh plugins
+- [ ] vimrc
+- [ ] Add aliases for ls, cat
 
-
-
-
-
-### Install order
-1. pacman -S vim curl git exa highlight python-pip powerline-fonts
-2. pip istall powerline-shell
-3. stow bash
-4. stow vim
-5. https://github.com/adam7/delugia-code/releases add font to windows
-6. vim
-  curl
-  git
-  exa
-  highlight
+- [ ] Windows terminal profile.json bacup
+- [ ] gitignore
+- [ ] terminal fonts https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Bold%20Italic.ttf https://github.com/adam7/delugia-code/releases
