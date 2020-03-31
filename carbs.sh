@@ -18,7 +18,7 @@ info(){
 }
 
 ### Create home dir structure
-tree=( ".config/zsh/plugins" ".local/bin" ".local/share" "script" "repos")
+tree=( ".config/zsh/plugins" ".local/bin" ".local/share" ".cache" "script" "repos")
 for dir in "${tree[@]}"; do
     [[ -d "${HOME}/${dir}" ]] && info "Directory ${HOME}/${dir} already exists" || (mkdir -p "${HOME}/${dir}" && info "Directory ${HOME}/${dir} created")
 done
