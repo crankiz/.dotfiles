@@ -1,0 +1,5 @@
+# Set alias alias for exa if it's installed
+which exa &>/dev/null && alias ls="exa --group-directories-first -la --git" || alias ls="ls  --group-directories-first --color -lahN"
+
+# Set alians for nvim if it's installed
+which nvim &>/dev/null && alias vim="nvim"

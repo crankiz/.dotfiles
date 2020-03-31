@@ -2,10 +2,11 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+export HISTFILE=${HOME}/.cache/.bash_history
+
 # Source external configs
-source $HOME/.export
-source $HOME/.aliases
-source $HOME/.functions
+source ${HOME}/.config/aliasrc
+source ${HOME}/.config/functionrc
 
 # check the window size after each command and, if necessary,
 shopt -s checkwinsize
@@ -45,8 +46,3 @@ unset color_prompt force_color_prompt
 
 eval "$(starship init bash)"
 
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-  PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
-
-#pfetch
