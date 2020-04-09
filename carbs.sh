@@ -63,7 +63,7 @@ install_repo_pkg(){
     done
 }
 
-[[ "$EUID" -eq 0 ]] && install_repo_pkg|| error "Installing package from ${pkgmgr} require root"
+sudo bash -c "$(declare -f install_repo_pkg); install_repo_pkg" || error "Installing package from ${pkgmgr} require root"
 
 ### Install from git repo
 readarray -d '' git_pkg < <(awk -F "," '/^G/{print $2","$3}' <<< "$(curl -fsSL ${package_list})")

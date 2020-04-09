@@ -1,12 +1,12 @@
-- [x] Clean up repo and make it work properly
+- [X] Clean up repo and make it work properly
+- [X] Fix .dotfiles and configs
+- [X] zshrc
+- [X] zsh plugins
+- [X] env paths
+- [X] gitignore
 - [ ] Deployment script
-- [ ] Fix .dotfiles and configs
-- [ ] zshrc
-- [x] zsh plugins
-- [ ] env paths
 - [ ] vimrc
 - [ ] Add aliases for ls, cat
-
 - [ ] Windows terminal profile.json bacup
-- [ ] gitignore
 - [ ] terminal fonts https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Bold%20Italic.ttf https://github.com/adam7/delugia-code/releases
+
